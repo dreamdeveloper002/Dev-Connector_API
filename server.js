@@ -2,6 +2,8 @@ const express = require('express');
 const connectDB = require('./config/db');
 const setHeaders = require('./middleware/headers-middleware');
 const morgan = require('morgan');
+const fs = require('fs');
+const path = require('path');
 
 const AuthRoute = require('./routes/api/auth');
 const UsersRoute = require('./routes/api/users');
@@ -17,10 +19,13 @@ app.use([urlencoded({ extended: false }), json()]);
 
 app.use(setHeaders);
 
+// Server logs
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs', 'access.log'), { flags: 'a' });
 app.use([
   morgan('combined'),
   morgan('combined', { stream: accessLogStream }),
 ]);
+
 
 // Connect Database
 connectDB();
@@ -28,10 +33,10 @@ connectDB();
 // Expose API endpoints
 const version = process.env.VERSION || 'v1.0.0';
 
-app.use(`api/${version}/users`, UsersRoute);
-app.use(`api/${version}/profile`, ProfileRoute);
-app.use(`api/${version}/posts`, PostRoute);
-app.use(`api/${version}/auth`, AuthRoute);
+app.use(`/api/${version}/users`, UsersRoute);
+app.use(`/api/${version}/profile`, ProfileRoute);
+app.use(`/api/${version}/posts`, PostRoute);
+app.use(`/api/${version}/auth`, AuthRoute);
 
 
 const PORT = process.env.PORT || 5000

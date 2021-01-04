@@ -7,6 +7,7 @@ const router = express.Router();
 //@desc Test route
 //@access Public(no token required)
 router.get('/', (req, res) => {
+    console.log('hello')
     res.send('User route');
 })
 
