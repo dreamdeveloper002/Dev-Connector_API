@@ -6,7 +6,7 @@ const ProfileSchema = new mongoose.Schema({
     ref: 'user'
   },
   company: {
-    type: String
+    type: String,
   },
   website: {
     type: String
@@ -20,10 +20,16 @@ const ProfileSchema = new mongoose.Schema({
   },
   
   availabilityStatus: {
-    type: Boolean,
-    default: true,
-    required: true,
-    select: false,
+    type: [String],
+    enum: [
+      'Available',
+      'Busy',
+      'At work',
+      'In a meeting',
+      'At the movies',
+      'Offline'
+    ],
+    default: 'Available'
   },
   
   availabilityMsg: {
@@ -36,7 +42,6 @@ const ProfileSchema = new mongoose.Schema({
   showAvailabilityMsg: {
     type: Boolean,
     default: true,
-    required: true,
     select: false,
   },
 
@@ -44,12 +49,15 @@ const ProfileSchema = new mongoose.Schema({
     type: [String],
     required: true
   },
+
   bio: { 
     type: String
   },
+
   githubusername: {
     type: String
   },
+
   experience: [
     {
       title: {
@@ -58,7 +66,7 @@ const ProfileSchema = new mongoose.Schema({
       },
       company: {
         type: String,
-        required: true
+        required: true,
       },
       location: {
         type: String
@@ -79,6 +87,7 @@ const ProfileSchema = new mongoose.Schema({
       }
     }
   ],
+
   education: [
     {
       school: {
@@ -109,6 +118,7 @@ const ProfileSchema = new mongoose.Schema({
       }
     }
   ],
+
   social: {
     youtube: {
       type: String

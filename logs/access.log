@@ -71,3 +71,5 @@
 ::1 - - [05/Jan/2021:06:28:03 +0000] "POST /api/v1.0.0/auth HTTP/1.1" 200 403 "-" "PostmanRuntime/7.26.3"
 ::1 - - [05/Jan/2021:06:28:05 +0000] "POST /api/v1.0.0/auth HTTP/1.1" 200 403 "-" "PostmanRuntime/7.26.3"
 ::1 - - [05/Jan/2021:10:07:57 +0000] "POST /api/v1.0.0/auth HTTP/1.1" 400 42 "-" "PostmanRuntime/7.26.3"
+::1 - - [05/Jan/2021:12:07:12 +0000] "POST /api/v1.0.0/auth HTTP/1.1" 200 403 "-" "PostmanRuntime/7.26.3"
+::1 - - [05/Jan/2021:12:07:53 +0000] "GET /api/v1.0.0/profile/me HTTP/1.1" 400 43 "-" "PostmanRuntime/7.26.3"
