@@ -4,10 +4,11 @@ const Post = require('../../models/Post');
 const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 const { check, validationResult } = require('express-validator');
+const { restart } = require('nodemon');
 
 
 
-//@route Post api/posts
+//@route POST api/posts
 //@desc  Create a post
 //@access Private(token required)
 router.post('/', [ auth,[ 
@@ -46,6 +47,26 @@ router.post('/', [ auth,[
     }
 });
 
+
+
+
+//@route GET api/posts
+//@desc  Get all posts
+//@access Private(token required)
+
+router.get('/', auth, async (req, res) => {
+    try {
+        
+        const post = await Post.find().sort({ date: -1 })
+        restart.json(post);
+
+    } catch (err) {
+
+        console.error(err.message); 
+        return res.status(500).send({ message: "Server error"}); 
+        
+    }
+});
  
 
 module.exports = router
